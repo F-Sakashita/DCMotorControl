@@ -19,3 +19,12 @@ Kfv = 1.0;      %速度推定の近似微分でのゲイン
 Tfv = 0.001;    %速度推定の近似微分でのカットオフ周期
 tf_vel_s = tf([Kfv,0],[Tfv,1]) %連続近似微分
 tf_vel_d = c2d(tf_vel_s,dt_major,'tustin')  %双一次変換による離散近似微分
+
+Kp_p= 4000.0;    %< Proportional gain of position control [s^2]
+Ki_p= 6000.0;    %< Integral     gain of position control [s^3]
+Kd_p= 140.0+100;     %< Differential gain of position control [s]
+
+Kp_c = 0.5;
+Ki_c = 10.0;
+
+Vm = 4.6;
