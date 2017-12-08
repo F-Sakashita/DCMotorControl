@@ -1,0 +1,15 @@
+
+#n#n/* DefaultTask function */
+void DefaultTask(void const * argument)
+{
+
+#n
+#t/* USER CODE BEGIN DefaultTask */
+#t/* Infinite loop */
+#tfor(;;)
+#t{
+#t#tosDelay(1);
+#t}
+#t/* USER CODE END DefaultTask */
+}
+#n

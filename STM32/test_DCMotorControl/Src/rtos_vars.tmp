@@ -1,0 +1,4 @@
+osThreadId DefaultHandle;
+osThreadId MinorLoopHandle;
+osThreadId MajorLoopControlHandle;
+osThreadId SerialCommunicationHandle;

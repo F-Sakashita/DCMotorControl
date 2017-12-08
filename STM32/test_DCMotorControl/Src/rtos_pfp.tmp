@@ -1,0 +1,4 @@
+void DefaultTask(void const * argument);
+extern void MinorLoopTask(void const * argument);
+extern void MajorLoopTask(void const * argument);
+extern void SerialCommunicationTask(void const * argument);
