@@ -34,6 +34,7 @@ extern "C" {
 #define Mn          0.0000005f      ///< Nominal Inertia [Nm/s^2*rad]←ここも単位違う気がする…これはトルクの単位なのでは？
 #define Rn          0.6818f         ///< Nominal resistance (Mabuchi FA-130RA-2270) [Ohm]
 #define Ln          0.000340f       ///< Nominal inductance (Mabuchi FA-130RA-2270) [H]
+#define Ken			0.001574f;		//追記．モータの逆起電力定数
 /**************************************************/
 
 /************ Default constol parameters *************/

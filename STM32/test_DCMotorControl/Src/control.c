@@ -199,6 +199,7 @@ void MajorLoopTask(void const * argument)
 
     resetControlVariables();
     configCurrentControl(true, Kp_c_DEFAULT, Ki_c_DEFAULT);
+    //configCurrentControl(false, Kp_c_DEFAULT, Ki_c_DEFAULT);
     setPositionResponse(0.0f, &VelocityResInt);
     enableControl();
 
@@ -377,7 +378,7 @@ static inline void MajorControlLoop(void)
     switch (ControlMode) {
         case PositionControlMode:
             PositionErr = PositionCmd - PositionRes;
-            VelocityErr = VelocityCmd - _VelocityRes;
+            VelocityErr = VelocityCmd - VelocityRes;
             PositionErrInt += PositionErr * dt_major;
             AccelerationRef = Kp_p * PositionErr + Kd_p * VelocityErr + Ki_p * PositionErrInt;
             break;
@@ -399,7 +400,12 @@ static inline void MajorControlLoop(void)
     //CurrentCmd = DOB(CurrentRef, VelocityRes); // Execute disturbance observer (Not implemented)
 
     if (!isEnabled_CurrentControl) {
+    	//V=R*I　逆起電力，インダクタンスを無視
         VoltageRef = CurrentCmd * Rn;
+    	//V = R*I + Ke*ω
+    	//VoltageRef = CurrentCmd * Rn + _VelocityRes * Ken;
+    	//V = R*I + Ke*ω + L*di/dt
+    	//VoltageRef = CurrentCmd * Rn + VelocityRes * Ken + Ln * ...
         setMotorVoltage(VoltageRef);
     }
 }
