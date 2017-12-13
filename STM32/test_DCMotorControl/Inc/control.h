@@ -39,9 +39,11 @@ extern "C" {
 
 /************ Default constol parameters *************/
 // Position control gains
+//#define Kp_p_DEFAULT    4900.0f     ///< Proportional gain of position control [s^2]
 #define Kp_p_DEFAULT    4900.0f     ///< Proportional gain of position control [s^2]
 #define Ki_p_DEFAULT    6000.0f     ///< Integral     gain of position control [s^3]
-#define Kd_p_DEFAULT    140.0f      ///< Differential gain of position control [s]
+//#define Kd_p_DEFAULT    140.0f      ///< Differential gain of position control [s]
+#define Kd_p_DEFAULT    160.0f      ///< Differential gain of position control [s]
 
 // Velocity control gains
 #define Kp_v_DEFAULT    200.0f      ///< Proportional gain of velocity control [s]

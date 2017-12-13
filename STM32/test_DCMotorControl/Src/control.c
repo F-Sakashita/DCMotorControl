@@ -51,7 +51,7 @@
 #include "CurrentSenseAmp_INA181.h"
 #include "RotaryEncoder_AS5600.h"
 #include "MotorDriver_TB6612.h"
-//#include "DOB.h" // Disturbance observer (Not implemented)
+#include "DOB.h" // Disturbance observer (Not implemented)
 
 // FreeRTOS
 #include "FreeRTOS.h"
@@ -327,7 +327,7 @@ static inline void MajorControlLoop(void)
     //float fmodf_time = fmodf(time_sec, 2.5f);
 	float fmodf_time = fmodf(time_sec, 2.0f);
     float PosCmd, VelCmd;
-   /* if (fmodf_time < 1.0f) {
+    /*if (fmodf_time < 1.0f) {
         PosCmd = 1.0f * sinf(1.0f * 2.0f * M_PI * fmodf_time);
         VelCmd = 1.0f * 2.0f * M_PI * 1.0f * cosf(1.0f * 2.0f * M_PI * fmodf_time);
     } else if (fmodf_time < 1.5f) {
@@ -380,6 +380,7 @@ static inline void MajorControlLoop(void)
             PositionErr = PositionCmd - PositionRes;
             VelocityErr = VelocityCmd - VelocityRes;
             PositionErrInt += PositionErr * dt_major;
+            Ki_p = 0;
             AccelerationRef = Kp_p * PositionErr + Kd_p * VelocityErr + Ki_p * PositionErrInt;
             break;
         case VelocityControlMode:
@@ -397,7 +398,7 @@ static inline void MajorControlLoop(void)
     CurrentRef = AccelerationRef * Acceleration2Current;
 
     CurrentCmd = CurrentRef;
-    //CurrentCmd = DOB(CurrentRef, VelocityRes); // Execute disturbance observer (Not implemented)
+    CurrentCmd = DOB(CurrentRef, VelocityRes); // Execute disturbance observer (Not implemented)
 
     if (!isEnabled_CurrentControl) {
     	//V=R*I　逆起電力，インダクタンスを無視
